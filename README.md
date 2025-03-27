@@ -6,7 +6,7 @@
 
 > This bootcamp is designed to get you familiar with GitHub Advanced Security (GHAS) so that you can better understand how to use it in your own repositories.
 
-## :mega: Prerequisites
+## :mega: Prerequisites [Test]
 To participate in the workshop you need a GitHub account and need to be invited to the workshop organization [advanced-security](https://github.com/advanced-security). If your repository hasn't been automatically created in the workshop organization, create a new project and push a copy of the `ghas-bootcamp-march-2021` project.
 
 ```bash
