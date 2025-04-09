@@ -1,0 +1,50 @@
+name: GHAS Security Pipeline 2
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  codeql-analysis:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript, python  # Change as per your project
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+      - name: Save CodeQL Report
+        run: |
+          echo "### CodeQL Analysis Report ###" > security-report.log
+          cat ./.github/codeql-results.sarif >> security-report.log || echo "No CodeQL results found." >> security-report.log
+
+  secret-scanning:
+    name: Secret Scanning
+    runs-on: ubuntu-latest
+    steps:
+      - name: secret-scanning-custom-action
+        uses: advanced-security/secret-scanning-tools@v1
+
+  dependabot-check:
+    name: Security Updates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Trigger Security Updates
+        run: |
+          echo "Running security updates..."
+      # Add your security update steps here
